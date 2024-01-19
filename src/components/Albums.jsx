@@ -42,25 +42,28 @@ const Albums = () => {
 			<Col className='col-12 mainPage'>
 				<Row>
 					<Col className='col-4'>
-						<div className='Albums' id='Albums'>
-							<div className='text-center'>
-								<img src={album?.cover_big} class='card-img fluid' alt='Album Poster' />
+						{album ? (
+							<div className='Albums' id='Albums'>
+								<div className='text-center'>
+									<img src={album.cover_big} class='card-img fluid' alt='Album Poster' />
+								</div>
+								<div className='text-center'>
+									<Link to={`/album/${album?.title}`}>{album?.title}</Link>
+								</div>
+								<div className='text-center'>
+									<Link to={`/artist/${album?.artist.name}`}>
+										Artist: {album.artist?.name}
+									</Link>
+								</div>
+								<div className='text-center'>
+									<button id='btnPlay' class='btn btn-success'>
+										Play
+									</button>
+								</div>
 							</div>
-							<div className='text-center'>
-								<Link to={`/album/${album?.title}`}>{album?.title}</Link>
-							</div>
-							<div className='text-center'>
-								<Link to={`/artist/${album.artist.name}`}>
-									Artist: {album.artist?.name}
-								</Link>
-							</div>
-
-							<div className='text-center'>
-								<button id='btnPlay' class='btn btn-success'>
-									Play
-								</button>
-							</div>
-						</div>
+						) : (
+							<p>Loading album...</p>
+						)}
 					</Col>
 					<Col className='col-6'>
 						<Row>

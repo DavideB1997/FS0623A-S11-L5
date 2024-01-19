@@ -1,6 +1,5 @@
 import { ADD_TO_FAVOURITE, REMOVE_FROM_FAVOURITE } from '../actions';
 
-// Load favorites from local storage, if available
 const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 const initialState = {
