@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import {
+	addToFavouriteAction,
+	removeFromFavouriteAction,
+} from '../redux/actions';
 
 const Albums = () => {
 	const { id } = useParams();
 	const [album, setAlbum] = useState(null);
 	const [songs, setSongs] = useState(null);
+
+	const favourites = useSelector((state) => state.favourite.list);
+	const dispatch = useDispatch();
 
 	const fetchAlbum = async () => {
 		try {
@@ -29,8 +37,6 @@ const Albums = () => {
 		fetchAlbum();
 	}, [id]);
 
-	console.log(album, songs);
-
 	return (
 		<>
 			<Col className='col-12 mainPage'>
@@ -39,11 +45,16 @@ const Albums = () => {
 						<div className='Albums' id='Albums'>
 							<div className='text-center'>
 								<img src={album?.cover_big} class='card-img fluid' alt='Album Poster' />
-								<p class='album-title'>{album?.title}</p>
 							</div>
 							<div className='text-center'>
-								<p class='artist-name'>{album?.artist.name}</p>
+								<Link to={`/album/${album?.title}`}>{album?.title}</Link>
 							</div>
+							<div className='text-center'>
+								<Link to={`/artist/${album.artist.name}`}>
+									Artist: {album.artist?.name}
+								</Link>
+							</div>
+
 							<div className='text-center'>
 								<button id='btnPlay' class='btn btn-success'>
 									Play
@@ -55,14 +66,13 @@ const Albums = () => {
 						<Row>
 							{songs &&
 								songs.map((song, i) => (
-									<div className='tackHover' key={i}>
+									<div className='tackHover d-flex justify-content-evenly' key={i}>
 										<Link
 											to='#'
-											class='card-title trackHover px-3 d-flex justify-content-between'
+											className='card-title trackHover px-3 d-flex justify-content-between'
 											style={{ color: 'white' }}
 										>
 											{song.title}
-
 											<span>
 												{Math.floor(parseInt(song.duration) / 60)}:
 												{parseInt(song.duration) % 60 < 10
@@ -70,6 +80,22 @@ const Albums = () => {
 													: parseInt(song.duration) % 60}
 											</span>
 										</Link>
+
+										{favourites.includes(song.title) ? (
+											<MdFavorite
+												color='green'
+												size={32}
+												className='mr-2 my-auto'
+												onClick={() => dispatch(removeFromFavouriteAction(song.title))}
+											/>
+										) : (
+											<MdFavoriteBorder
+												color='green'
+												size={32}
+												className='mr-2 my-auto'
+												onClick={() => dispatch(addToFavouriteAction(song.title))}
+											/>
+										)}
 									</div>
 								))}
 						</Row>

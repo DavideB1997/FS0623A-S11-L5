@@ -5,8 +5,8 @@ const Playlist = () => {
 	const elementiPlaylist1 = [
 		'queen',
 		'led zeppelin',
-		'AC/DC',
-		'Pink Floyd',
+		'metallica',
+		'Aerosmith',
 		'U2',
 	];
 	const elementiPlaylist2 = [
@@ -29,7 +29,7 @@ const Playlist = () => {
 			<Row>
 				<h2>{title}</h2>
 				{elementi.map((elemento, i, genre) => (
-					<SingleSong search={elemento} key={`${genre}_${i}`} />
+					<SingleSong search={elemento} num={0} key={`${genre}_${i}`} />
 				))}
 			</Row>
 		</div>

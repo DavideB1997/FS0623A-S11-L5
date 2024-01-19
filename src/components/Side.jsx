@@ -1,6 +1,8 @@
 import { Button, Image, Nav, Navbar, Row } from 'react-bootstrap';
 import { FaHome } from 'react-icons/fa';
+import { MdFavorite } from 'react-icons/md';
 import { VscLibrary } from 'react-icons/vsc';
+import { Link } from 'react-router-dom';
 import SpotifyLogo from '../assets/logo/Spotify_Logo.png';
 
 const Side = () => {
@@ -12,10 +14,17 @@ const Side = () => {
 				</Navbar.Brand>
 				<Row>
 					<Nav.Link href='/'>
-						<FaHome /> Home
+						{' '}
+						<FaHome />
+						Home
 					</Nav.Link>
-					<Nav.Link href='#'>
+					<Nav.Link href='/'>
+						{' '}
 						<VscLibrary /> Library
+					</Nav.Link>
+					<Nav.Link href='/Favourites'>
+						{' '}
+						<MdFavorite /> Favourites
 					</Nav.Link>
 				</Row>
 			</Nav>

@@ -13,14 +13,13 @@ const SingleSong = (props) => {
 				);
 				if (response.ok) {
 					const data = await response.json();
-					setSong(data.data[0]);
+					setSong(data.data[props.num]);
 				}
 			} catch (err) {
 				console.log(err);
 			}
 		};
 		fetchData();
-		console.log(song);
 	}, [props.search]);
 
 	return (
@@ -31,12 +30,11 @@ const SingleSong = (props) => {
 					key={props.key}
 					className='bg-transparent border-0'
 				>
-					<Link to={`/album/${song.album.id}`}>
+					<Link to={`/album/${song.album.id}`} className='imgLinks'>
 						<Card.Img variant='top' src={song.album?.cover_medium} />
 					</Link>
-
+					<Card.Title className='text-center text-white'>{song.title}</Card.Title>
 					<Card.Body>
-						<Card.Title>{song.title}</Card.Title>
 						<Row>
 							<Col>
 								<Link to={`/album/${song.album.id}`}>

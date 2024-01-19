@@ -1,19 +1,25 @@
 export const GET_SEARCH = 'GET_SEARCH';
+export const ADD_TO_FAVOURITE = 'ADD_TO_FAVOURITE';
+export const REMOVE_FROM_FAVOURITE = 'REMOVE_FROM_FAVOURITE';
 
-const baseEndPoint = 'https://deezerdevs-deezer.p.rapidapi.com/';
+const baseEndPoint =
+	'https://striveschool-api.herokuapp.com/api/deezer/search?q=';
+const limit = '&limit=10';
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'c93046165fmshe7abc1c7340997fp1b467djsn71ea54a2484d',
-		'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com',
-	},
-};
+export const addToFavouriteAction = (songId) => ({
+	type: ADD_TO_FAVOURITE,
+	payload: songId,
+});
+
+export const removeFromFavouriteAction = (songId) => ({
+	type: REMOVE_FROM_FAVOURITE,
+	payload: songId,
+});
 
 export const getSearchAction = (query) => {
 	return async (dispatch) => {
 		try {
-			const response = await fetch(baseEndPoint + query, options);
+			const response = await fetch(baseEndPoint + query + limit);
 			if (response.ok) {
 				const { data } = await response.json();
 
@@ -21,7 +27,6 @@ export const getSearchAction = (query) => {
 					type: GET_SEARCH,
 					payload: data,
 				});
-				console.log('daje');
 			} else {
 				alert('Error fetching data!');
 			}
