@@ -10,20 +10,18 @@ const Favourites = () => {
 
 	return (
 		<>
-			{favourites.map((fav, i) => {
-				console.log(fav);
-				return (
-					<div className='favorite-song' key={i}>
-						<SingleSong search={fav} num={0} />
-						<MdFavorite
-							color='green'
-							size={48}
-							className='mr-2 my-auto'
-							onClick={() => dispatch(removeFromFavouriteAction(fav))}
-						/>
-					</div>
-				);
-			})}
+			<h1> Favourites!</h1>
+			{favourites.map((fav, i) => (
+				<div className='favorite-song' key={fav.id}>
+					<SingleSong search={fav} num={0} />
+					<MdFavorite
+						color='green'
+						size={48}
+						className='mr-2 my-auto'
+						onClick={() => dispatch(removeFromFavouriteAction(fav))}
+					/>
+				</div>
+			))}
 		</>
 	);
 };

@@ -1,17 +1,15 @@
-import {} from '../actions';
+import { ADD_TO_MUSICPLAYER } from '../actions';
 
 const initialState = {
-	song: storedFavorites,
+	player: null,
 };
 
 const musicPlayerReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case ADD_TO_MUSICPLAYER:
-			const updatedAddState = {
-				song: [state.song, action.payload],
-			};
-			localStorage.setItem('favorites', JSON.stringify(updatedAddState.list));
-			return updatedAddState;
+			return { player: action.payload };
+		default:
+			return state;
 	}
 };
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import {
 	addToFavouriteAction,
+	addToMusicPlayerAction,
 	removeFromFavouriteAction,
 } from '../redux/actions';
 
@@ -74,6 +75,7 @@ const Albums = () => {
 											to='#'
 											className='card-title trackHover px-3 d-flex justify-content-between'
 											style={{ color: 'white' }}
+											onClick={() => dispatch(addToMusicPlayerAction(song))}
 										>
 											{song.title}
 											<span>
